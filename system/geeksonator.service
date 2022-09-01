@@ -1,0 +1,15 @@
+[Unit]
+Description=Geeksonator Bot for PanteleevGroup chats
+Wants=network.target
+After=network.target
+
+[Service]
+Type=simple
+
+Restart=on-failure
+RestartSec=10
+
+ExecStart=/opt/geeksonator
+
+[Install]
+WantedBy=multi-user.target
