@@ -5,6 +5,7 @@ After=network.target
 
 [Service]
 Type=simple
+EnvironmentFile=-/etc/geeksonator.conf
 
 Restart=on-failure
 RestartSec=10
