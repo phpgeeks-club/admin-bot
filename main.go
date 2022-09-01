@@ -21,6 +21,7 @@ func main() {
 
 	updates := bot.GetUpdatesChan(u)
 	commands := [22]string{"/help", "/хелп", "/php", "/пхп", "/jun", "/джун", "/go", "/го", "/db", "/дб", "/lara", "/лара", "/js", "/жс", "/hr", "/хр", "/fl", "/фл", "/code", "/код", "/nometa", "/номета"}
+	subbotinvID := int64(227974324)
 
 	for update := range updates {
 		if update.Message == nil {
@@ -36,6 +37,10 @@ func main() {
 			if admin.User.ID == update.Message.From.ID {
 				authorIsAdmin = true
 			}
+		}
+
+		if update.Message.From.ID == subbotinvID {
+			authorIsAdmin = true
 		}
 
 		if !authorIsAdmin {
