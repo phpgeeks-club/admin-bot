@@ -31,6 +31,11 @@ func main() {
 		message := ""
 
 		admins, _ := bot.GetChatAdministrators(tgbotapi.ChatAdministratorsConfig{ChatConfig: update.Message.Chat.ChatConfig()})
+		if err != nil {
+			log.Printf("GetChatAdministrators error: %v", err)
+
+			continue
+		}
 
 		for _, admin := range admins {
 			if admin.User.ID == update.Message.From.ID {
