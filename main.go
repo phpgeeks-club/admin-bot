@@ -48,7 +48,7 @@ func main() {
 		}
 
 		for _, command := range commands {
-			if strings.Contains(update.Message.Text, command) {
+			if update.Message.Text == command || strings.Contains(update.Message.Text, " "+command+" ") {
 				switch command {
 				case "/help", "/хелп":
 					message = `БОТ РАБОТАЕТ ТОЛЬКО У АДМИНОВ.
