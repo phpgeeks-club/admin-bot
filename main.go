@@ -81,6 +81,7 @@ func main() {
 [<code>/js</code>, <code>/жс</code>] @jsChat - Чат посвященный программированию на языке JavaScript.
 [<code>/hr</code>, <code>/хр</code>] @jobGeeks - Топ вакансии (250 000+ р/мес).
 [<code>/fl</code>, <code>/фл</code>] @freelanceGeeks - IT фриланс, ищем исполнителей и заказчиков, делимся опытом и проблемами связанными с фрилансом.
+[<code>/job</code>, <code>/раб</code>] Объединяет сразу две команды: <code>/hr</code> и <code>/fl</code>.
 [<code>/code</code>, <code>/код</code>] Код в нашем чате <a href=\"https://t.me/phpGeeks/1318040\">ложут</a> на pastebin.org, gist.github.com или любой аналогичный ресурс (с)der_Igel
 [<code>/nometa</code>, <code>/номета</code>] nometa.xyz`
 		case "/php", "/пхп":
@@ -99,6 +100,9 @@ func main() {
 			message = "@jobGeeks - Топ вакансии (250 000+ р/мес)."
 		case "/fl", "/фл":
 			message = "@freelanceGeeks - IT фриланс, ищем исполнителей и заказчиков, делимся опытом и проблемами связанными с фрилансом."
+		case "/job", "/раб":
+			message = `@jobGeeks - Топ вакансии (250 000+ р/мес).
+@freelanceGeeks - IT фриланс, ищем исполнителей и заказчиков, делимся опытом и проблемами связанными с фрилансом.`
 		case "/code", "/код":
 			message = "Код в нашем чате <a href=\"https://t.me/phpGeeks/1318040\">ложут</a> на pastebin.org, gist.github.com или любой аналогичный ресурс (с)der_Igel"
 		case "/nometa", "/номета":
