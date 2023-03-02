@@ -1,12 +1,20 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"os"
 	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
+
+var debug *bool
+
+func init() {
+	debug = flag.Bool("debug", false, "Debug mode")
+	flag.Parse()
+}
 
 func main() {
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("GEEKSONATOR_TELEGRAM_BOT_TOKEN"))
@@ -15,6 +23,10 @@ func main() {
 	}
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
+
+	if *debug {
+		log.Printf("Debug mode running")
+	}
 
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60 // long polling
@@ -25,6 +37,10 @@ func main() {
 	for update := range updates {
 		if update.Message == nil {
 			continue
+		}
+
+		if *debug {
+			log.Printf("Message: \"%s\"", update.Message.Text)
 		}
 
 		authorIsAdmin := false
@@ -41,6 +57,10 @@ func main() {
 			if admin.User.ID == update.Message.From.ID {
 				authorIsAdmin = true
 			}
+		}
+
+		if *debug {
+			authorIsAdmin = true
 		}
 
 		if !authorIsAdmin {
@@ -93,6 +113,10 @@ func main() {
 
 		if message == "" {
 			continue
+		}
+
+		if *debug {
+			log.Printf("Output: %s", message)
 		}
 
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, message)
