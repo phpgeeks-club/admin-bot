@@ -11,3 +11,10 @@ sudo service geeksonator start
 ```
 
 Also, the bot must disable Privacy mode (in BotFather) before being included in groups (otherwise it will not have access to messages to do reply)
+
+## Run in debug mode
+
+```
+export GEEKSONATOR_TELEGRAM_BOT_TOKEN="bot_token_here"
+/opt/geeksonator -debug
+```
