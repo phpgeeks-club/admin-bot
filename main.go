@@ -37,12 +37,15 @@ func main() {
 			continue
 		}
 
+		if !update.Message.IsCommand() {
+			continue
+		}
+
 		if *debug {
-			log.Printf("Message: \"%s\"", update.Message.Text)
+			log.Printf("Message: \"%s\"", update.Message.Command())
 		}
 
 		authorIsAdmin := false
-		message := ""
 
 		admins, _ := bot.GetChatAdministrators(tgbotapi.ChatAdministratorsConfig{ChatConfig: update.Message.Chat.ChatConfig()})
 		if err != nil {
@@ -65,8 +68,10 @@ func main() {
 			continue
 		}
 
-		switch update.Message.Text {
-		case "/help", "/хелп":
+		var message string
+
+		switch update.Message.Command() {
+		case "help", "хелп":
 			message = `БОТ РАБОТАЕТ ТОЛЬКО У АДМИНОВ.
 
 Команды можно писать обычным сообщением и ответом на сообщение.
@@ -84,28 +89,28 @@ func main() {
 [<code>/job</code>, <code>/раб</code>] Объединяет сразу две команды: <code>/hr</code> и <code>/fl</code>.
 [<code>/code</code>, <code>/код</code>] Код в нашем чате <a href="https://t.me/phpGeeks/1318040">ложут</a> на pastebin.org, gist.github.com или любой аналогичный ресурс (с)der_Igel
 [<code>/nometa</code>, <code>/номета</code>] nometa.xyz`
-		case "/php", "/пхп":
+		case "php", "пхп":
 			message = "@phpGeeks - Best PHP chat"
-		case "/jun", "/джун":
+		case "jun", "джун":
 			message = "@phpGeeksJunior - Группа для новичков. Не стесняйтесь задавать вопросы по php."
-		case "/go", "/го":
+		case "go", "го":
 			message = "@golangGeeks - Приветствуем всех в нашем гетеросексуальном чате гоферов!"
-		case "/db", "/бд":
+		case "db", "бд":
 			message = "@dbGeeks - Чат про базы данных, их устройство и приемы работы с ними."
-		case "/lara", "/лара":
+		case "lara", "лара":
 			message = "@laravel_pro - Официальный чат для всех Laravel программистов."
-		case "/js", "/жс":
+		case "js", "жс":
 			message = "@jsChat - Чат посвященный программированию на языке JavaScript."
-		case "/hr", "/хр":
+		case "hr", "хр":
 			message = "@jobGeeks - Топ вакансии (250 000+ р/мес)."
-		case "/fl", "/фл":
+		case "fl", "фл":
 			message = "@freelanceGeeks - IT фриланс, ищем исполнителей и заказчиков, делимся опытом и проблемами связанными с фрилансом."
-		case "/job", "/раб":
+		case "job", "раб":
 			message = `@jobGeeks - Топ вакансии (250 000+ р/мес).
 @freelanceGeeks - IT фриланс, ищем исполнителей и заказчиков, делимся опытом и проблемами связанными с фрилансом.`
-		case "/code", "/код":
+		case "code", "код":
 			message = "Код в нашем чате <a href=\"https://t.me/phpGeeks/1318040\">ложут</a> на pastebin.org, gist.github.com или любой аналогичный ресурс (с)der_Igel"
-		case "/nometa", "/номета":
+		case "nometa", "номета":
 			message = "nometa.xyz"
 		}
 
