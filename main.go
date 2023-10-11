@@ -123,6 +123,10 @@ func main() {
 
 		if update.Message.ReplyToMessage != nil {
 			msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
+
+			if update.Message.ReplyToMessage.From != nil && update.Message.ReplyToMessage.From.UserName != "" {
+				msg.Text = "@" + update.Message.ReplyToMessage.From.UserName + " " + msg.Text
+			}
 		}
 
 		_, err = bot.Send(msg)
