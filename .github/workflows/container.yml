@@ -1,0 +1,36 @@
+name: deploy to ghcr.io
+
+on:
+  push:
+    # run only against tags
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub Action
+        uses: actions/checkout@main
+
+      - name: Fetch tags
+        run: git fetch --force --tags
+
+      - name: Display tag
+        run: echo ${{github.ref_name}}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build Image
+        run: docker build . --tag ghcr.io/phpgeeks-club/geeksonator:${{github.ref_name}}
+
+      - name: Push Image
+        run: docker push ghcr.io/phpgeeks-club/geeksonator:${{github.ref_name}}

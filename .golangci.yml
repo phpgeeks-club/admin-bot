@@ -1,0 +1,88 @@
+run:
+  concurrency: 4
+  timeout: 5m
+
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - cyclop
+    - dogsled
+    - dupl
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - forcetypeassert
+    - gci
+    - gocheckcompilerdirectives
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - gofmt
+    - goimports
+    - gomnd
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - importas
+    - ineffassign
+    - maintidx
+    - makezero
+    - misspell
+    - musttag
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnil
+    - nlreturn
+    - noctx
+    - nolintlint
+    - nosprintfhostport
+    - paralleltest
+    - prealloc
+    - predeclared
+    - reassign
+    - revive
+    - staticcheck
+    - stylecheck
+    - tagliatelle
+    - thelper
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    - whitespace
+    - wrapcheck
+
+linters-settings:
+  errorlint:
+    errorf: false
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(geeksonator)
+  gocognit:
+    min-complexity: 10
+  gocyclo:
+    min-complexity: 10
+  nestif:
+    min-complexity: 4
+  unparam:
+    check-exported: true
