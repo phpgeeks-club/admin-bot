@@ -1,2 +1,4 @@
-.vscode
-geeksonator
+.vscode/
+bin/
+dist/
+.env

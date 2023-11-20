@@ -1,0 +1,10 @@
+quiet: true
+with-expecter: true
+disable-config-search: true
+dir: "{{.InterfaceDir}}/mocks"
+mockname: "{{.InterfaceName}}Mock"
+filename: "{{.InterfaceName | snakecase}}_mock.go"
+outpkg: "mocks"
+packages:
+  geeksonator/internal/observer:
+  geeksonator/internal/provider/telegram:

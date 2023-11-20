@@ -1,0 +1,45 @@
+name: audit
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ["1.21"]
+
+    steps:
+      - name: Checkout GitHub Action
+        uses: actions/checkout@v4
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.55.2
+
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Display Go version
+        run: go version
+
+      - name: Install dependencies
+        run: |
+          go mod tidy
+          go mod vendor
+          go install github.com/vektra/mockery/v2@v2.36.0
+
+      - name: Run golangci-lint
+        run: golangci-lint run
+
+      - name: Run test
+        run: go test ./...
