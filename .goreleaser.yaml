@@ -1,0 +1,15 @@
+project_name: geeksonator
+builds:
+  - id: geeksonator
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+    main: ./cmd/geeksonator
+    binary: ./bin/geeksonator
