@@ -6,7 +6,7 @@
 # STEP 1 build executable binary #
 ##################################
 
-FROM golang:1.21.4-alpine as builder
+FROM golang:1.23.6-alpine as builder
 
 LABEL org.opencontainers.image.source="https://github.com/phpgeeks-club/admin-bot"
 

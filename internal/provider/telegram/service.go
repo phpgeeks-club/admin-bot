@@ -33,7 +33,7 @@ func (s *Service) GetChatAdministrators(chatConfig tgbotapi.ChatConfig) ([]tgbot
 }
 
 // NewMessage creates new message.
-func (s *Service) NewMessage(chatID int64, text string) tgbotapi.MessageConfig {
+func (*Service) NewMessage(chatID int64, text string) tgbotapi.MessageConfig {
 	return tgbotapi.NewMessage(chatID, text)
 }
 

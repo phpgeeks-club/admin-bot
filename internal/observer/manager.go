@@ -200,7 +200,7 @@ func authorIsAdmin(admins []tgbotapi.ChatMember, userID int64) bool {
 }
 
 // getMessageText returns message text.
-func getMessageText(text string) string { //nolint:cyclop,gocyclo
+func getMessageText(text string) string {
 	switch text {
 	case "/help", "/хелп":
 		return `БОТ РАБОТАЕТ ТОЛЬКО У АДМИНОВ.

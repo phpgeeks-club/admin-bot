@@ -43,7 +43,7 @@ func Start() error {
 	if err != nil {
 		return fmt.Errorf("newLogger: %v", err)
 	}
-	defer logger.Sync() //nolint:errcheck
+	defer logger.Sync() //nolint:errcheck // it's ok
 
 	var tgBotToken string
 	if cfg.DebugMode {
@@ -118,7 +118,7 @@ func Start() error {
 }
 
 // newLogger creates new logger.
-func newLogger(debugMode bool) (*zap.Logger, error) {
+func newLogger(debugMode bool) (*zap.Logger, error) { //nolint:revive // false positive
 	if debugMode {
 		logger, err := zap.NewDevelopment()
 		if err != nil {

@@ -3,7 +3,47 @@ run:
   timeout: 5m
 
 linters:
-  disable-all: true
+  disable-all:
+    true
+    # Disabled linters:
+    # canonicalheader
+    # decorder
+    # dupword
+    # err113
+    # exhaustruct
+    # forbidigo
+    # forcetypeassert # заменён на errcheck
+    # funlen
+    # ginkgolinter
+    # gofmt # заменён на goimports
+    # gofumpt # заменён на goimports
+    # goheader
+    # gomoddirectives
+    # gomodguard # используется более мощный depguard
+    # gosmopolitan
+    # grouper
+    # interfacebloat
+    # intrange
+    # ireturn
+    # lll
+    # loggercheck
+    # mirror
+    # misspell # бесполезный
+    # nonamedreturns
+    # nlreturn # слишком строгий и в основном код не более читабелен
+    # paralleltest # слишком много ложных срабатываний
+    # protogetter
+    # sloglint
+    # spancheck
+    # sqlclosecheck
+    # tagalign
+    # tenv # заменён на usetesting.os-setenv: true
+    # testableexamples
+    # testpackage
+    # varnamelen
+    # wastedassign
+    # wsl # слишком строгий и в основном код не более читабелен
+    # zerologlint
   enable:
     - asasalint
     - asciicheck
@@ -11,7 +51,9 @@ linters:
     - bodyclose
     - containedctx
     - contextcheck
+    - copyloopvar
     - cyclop
+    - depguard
     - dogsled
     - dupl
     - durationcheck
@@ -20,59 +62,86 @@ linters:
     - errname
     - errorlint
     - exhaustive
-    - exportloopref
-    - forcetypeassert
+    - exptostd
+    - fatcontext
     - gci
     - gocheckcompilerdirectives
     - gochecknoglobals
     - gochecknoinits
+    - gochecksumtype
     - gocognit
     - goconst
     - gocritic
     - gocyclo
     - godot
     - godox
-    - gofmt
     - goimports
-    - gomnd
     - goprintffuncname
     - gosec
     - gosimple
     - govet
+    - iface
     - importas
+    - inamedparam
     - ineffassign
     - maintidx
     - makezero
-    - misspell
+    - mnd # https://golangci-lint.run/usage/linters/#mnd
     - musttag
     - nakedret
     - nestif
     - nilerr
+    - nilnesserr
     - nilnil
-    - nlreturn
     - noctx
     - nolintlint
     - nosprintfhostport
-    - paralleltest
+    - perfsprint
     - prealloc
     - predeclared
+    - promlinter
     - reassign
+    - recvcheck
     - revive
+    - rowserrcheck
     - staticcheck
     - stylecheck
     - tagliatelle
+    - testifylint
     - thelper
+    - tparallel
     - typecheck
     - unconvert
     - unparam
     - unused
     - usestdlibvars
+    - usetesting
     - whitespace
     - wrapcheck
 
 linters-settings:
+  cyclop:
+    max-complexity: 15
+    skip-tests: true
+  depguard:
+    rules:
+      main:
+        list-mode: lax
+        deny:
+          - pkg: "github.com/pkg/errors"
+            desc: Should be replaced by standard lib errors package
+          - pkg: "github.com/golang/protobuf"
+            desc: "Use google.golang.org/protobuf instead, see https://developers.google.com/protocol-buffers/docs/reference/go/faq#modules"
+  errcheck:
+    check-type-assertions: true
   errorlint:
     errorf: false
+  exhaustive:
+    # Presence of "default" case in switch statements satisfies exhaustiveness,
+    # even if all enum members are not listed.
+    default-signifies-exhaustive: true
+    # Only run exhaustive check on switches with "//exhaustive:enforce" comment.
+    explicit-exhaustive-switch: true
   gci:
     sections:
       - standard
@@ -81,8 +150,70 @@ linters-settings:
   gocognit:
     min-complexity: 10
   gocyclo:
-    min-complexity: 10
+    min-complexity: 15
+  goimports:
+    local-prefixes: capuchin
+  gosec:
+    excludes:
+      - G108 # Profiling endpoint automatically exposed on /debug/pprof
+  govet:
+    # Run `GL_DEBUG=govet golangci-lint run --enable=govet` to see default, all available analyzers, and enabled analyzers.
+    enable-all: true
+    disable:
+      - fieldalignment # Использовать при необходимости, ухудшается читаемость кода
+      - slog # На проекте используется zap
+    settings:
+      shadow:
+        strict: true
+  iface:
+    enable:
+      - identical
+      - unused
+      - opaque
   nestif:
     min-complexity: 4
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+  revive:
+    enable-all-rules: true
+    rules:
+      - name: add-constant
+        disabled: true
+      - name: cognitive-complexity
+        disabled: true
+      - name: comment-spacings
+        disabled: true
+      - name: cyclomatic
+        disabled: true
+      - name: function-length
+        disabled: true
+      - name: line-length-limit
+        disabled: true
+      - name: max-public-structs
+        disabled: true
+      - name: unused-parameter
+        disabled: true
+  rowserrcheck:
+    packages:
+      - github.com/jmoiron/sqlx
+  tagliatelle:
+    case:
+      use-field-name: true
+  testifylint:
+    enable-all: true
+    disable:
+      - require-error
   unparam:
     check-exported: true
+
+issues:
+  # Maximum count of issues with the same text.
+  # Set to 0 to disable.
+  # Default: 3
+  max-same-issues: 50
+
+  exclude-rules:
+    - linters:
+        - govet
+      text: '^shadow: declaration of "err" shadows declaration.+'
