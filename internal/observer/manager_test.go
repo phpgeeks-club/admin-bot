@@ -43,7 +43,6 @@ func TestNewManager(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -57,7 +56,7 @@ func TestNewManagerWithDebug(t *testing.T) {
 	t.Parallel()
 
 	m := NewManager(nil, nil, nil, WithDebug(zap.NewNop()))
-	assert.NotEqual(t, nil, m.logger)
+	assert.NotNil(t, m.logger)
 }
 
 func TestNewManagerWithSkipAdminCheck(t *testing.T) {
@@ -183,7 +182,6 @@ func TestManager_processingUpdate(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -359,7 +357,6 @@ func TestManager_processingMessage(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -529,7 +526,6 @@ func TestManager_sendMessage(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -636,7 +632,6 @@ func TestManager_getAdmins(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -689,7 +684,6 @@ func Test_authorIsAdmin(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -719,7 +713,6 @@ func Test_getMessageText(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 

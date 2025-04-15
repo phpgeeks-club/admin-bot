@@ -31,11 +31,10 @@ func TestCacher_Cacher(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			assert.Equal(t, tt.wantLen, len(tt.cacher.items))
+			assert.Len(t, tt.cacher.items, tt.wantLen)
 		})
 	}
 }
@@ -91,7 +90,6 @@ func TestNewCacher(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -111,7 +109,7 @@ func TestNewCacherWithDebug(t *testing.T) {
 	_ = cacher.Set("k2", 2)
 	_ = cacher.Set("k3", 3)
 
-	assert.NotEqual(t, nil, cacher.logger)
+	assert.NotNil(t, cacher.logger)
 }
 
 func TestNewCacherWithUpdateLastUsed(t *testing.T) {
@@ -199,7 +197,6 @@ func TestCacher_LastUsed(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -320,7 +317,6 @@ func TestCacher_Get(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -384,7 +380,6 @@ func TestCacher_Set(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -469,7 +464,6 @@ func TestCacher_clearSpace(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -506,7 +500,6 @@ func Test_isEmpty(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 

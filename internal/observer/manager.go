@@ -200,7 +200,7 @@ func authorIsAdmin(admins []tgbotapi.ChatMember, userID int64) bool {
 }
 
 // getMessageText returns message text.
-func getMessageText(text string) string { //nolint:cyclop,gocyclo
+func getMessageText(text string) string {
 	switch text {
 	case "/help", "/хелп":
 		return `БОТ РАБОТАЕТ ТОЛЬКО У АДМИНОВ.
@@ -219,7 +219,8 @@ func getMessageText(text string) string { //nolint:cyclop,gocyclo
 [<code>/fl</code>, <code>/фл</code>] @freelanceGeeks - IT фриланс, ищем исполнителей и заказчиков, делимся опытом и проблемами связанными с фрилансом.
 [<code>/job</code>, <code>/раб</code>] Объединяет сразу две команды: <code>/hr</code> и <code>/fl</code>.
 [<code>/code</code>, <code>/код</code>] Код в нашем чате <a href="https://t.me/phpGeeks/1318040">ложут</a> на pastebin.org, gist.github.com или любой аналогичный ресурс (с)der_Igel
-[<code>/nometa</code>, <code>/номета</code>] nometa.xyz`
+[<code>/nometa</code>, <code>/номета</code>] nometa.xyz
+[<code>/wtf</code>, <code>/втф</code>] А причём тут пхп?`
 	case "/php", "/пхп":
 		return "@phpGeeks - Best PHP chat"
 	case "/jun", "/джун":
@@ -243,6 +244,8 @@ func getMessageText(text string) string { //nolint:cyclop,gocyclo
 		return "Код в нашем чате <a href=\"https://t.me/phpGeeks/1318040\">ложут</a> на pastebin.org, gist.github.com или любой аналогичный ресурс (с)der_Igel"
 	case "/nometa", "/номета":
 		return "nometa.xyz"
+	case "/wtf", "/втф":
+		return "А причём тут пхп?"
 	}
 
 	return ""
