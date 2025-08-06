@@ -108,7 +108,7 @@ func TestManager_processingUpdate(t *testing.T) {
 				cache := mocks.NewCacheMock(t)
 
 				cache.EXPECT().
-					Get(cacheKey).
+					Get(int64(300600)).
 					Return(
 						[]tgbotapi.ChatMember{
 							{
@@ -262,7 +262,7 @@ func TestManager_processingMessage(t *testing.T) {
 				cache := mocks.NewCacheMock(t)
 
 				cache.EXPECT().
-					Get(cacheKey).
+					Get(int64(300600)).
 					Return([]tgbotapi.ChatMember{
 						{
 							User: &tgbotapi.User{
@@ -277,7 +277,9 @@ func TestManager_processingMessage(t *testing.T) {
 			},
 			args: args{
 				message: &tgbotapi.Message{
-					Chat: &tgbotapi.Chat{},
+					Chat: &tgbotapi.Chat{
+						ID: 300600,
+					},
 					From: &tgbotapi.User{
 						ID: 100500,
 					},
@@ -293,7 +295,7 @@ func TestManager_processingMessage(t *testing.T) {
 				cache := mocks.NewCacheMock(t)
 
 				cache.EXPECT().
-					Get(cacheKey).
+					Get(int64(300600)).
 					Return(
 						[]tgbotapi.ChatMember{
 							{
@@ -311,7 +313,9 @@ func TestManager_processingMessage(t *testing.T) {
 			},
 			args: args{
 				message: &tgbotapi.Message{
-					Chat: &tgbotapi.Chat{},
+					Chat: &tgbotapi.Chat{
+						ID: 300600,
+					},
 					From: &tgbotapi.User{
 						ID: 100500,
 					},
@@ -327,7 +331,7 @@ func TestManager_processingMessage(t *testing.T) {
 				cache := mocks.NewCacheMock(t)
 
 				cache.EXPECT().
-					Get(cacheKey).
+					Get(int64(300600)).
 					Return(
 						[]tgbotapi.ChatMember{
 							{
@@ -345,7 +349,9 @@ func TestManager_processingMessage(t *testing.T) {
 			},
 			args: args{
 				message: &tgbotapi.Message{
-					Chat: &tgbotapi.Chat{},
+					Chat: &tgbotapi.Chat{
+						ID: 300600,
+					},
 					From: &tgbotapi.User{
 						ID: 100501,
 					},
@@ -554,7 +560,7 @@ func TestManager_getAdmins(t *testing.T) {
 				cache := mocks.NewCacheMock(t)
 
 				cache.EXPECT().
-					Get(cacheKey).
+					Get(int64(300600)).
 					Return([]tgbotapi.ChatMember{
 						{
 							User: &tgbotapi.User{
@@ -568,7 +574,9 @@ func TestManager_getAdmins(t *testing.T) {
 				}
 			},
 			args: args{
-				chatCfg: tgbotapi.ChatConfig{},
+				chatCfg: tgbotapi.ChatConfig{
+					ChatID: 300600,
+				},
 			},
 			wantResult: []tgbotapi.ChatMember{
 				{
@@ -585,7 +593,9 @@ func TestManager_getAdmins(t *testing.T) {
 				botProvider := mocks.NewBotProviderMock(t)
 
 				botProvider.EXPECT().
-					GetChatAdministrators(tgbotapi.ChatConfig{}).
+					GetChatAdministrators(tgbotapi.ChatConfig{
+						ChatID: 300600,
+					}).
 					Return(
 						[]tgbotapi.ChatMember{
 							{
@@ -600,11 +610,11 @@ func TestManager_getAdmins(t *testing.T) {
 				cache := mocks.NewCacheMock(t)
 
 				cache.EXPECT().
-					Get(cacheKey).
+					Get(int64(300600)).
 					Return(nil, false)
 
 				cache.EXPECT().
-					Set(cacheKey, []tgbotapi.ChatMember{
+					Set(int64(300600), []tgbotapi.ChatMember{
 						{
 							User: &tgbotapi.User{
 								ID: 100500,
@@ -619,7 +629,9 @@ func TestManager_getAdmins(t *testing.T) {
 				}
 			},
 			args: args{
-				chatCfg: tgbotapi.ChatConfig{},
+				chatCfg: tgbotapi.ChatConfig{
+					ChatID: 300600,
+				},
 			},
 			wantResult: []tgbotapi.ChatMember{
 				{
