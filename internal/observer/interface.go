@@ -19,8 +19,8 @@ type BotProvider interface {
 // Cache interface for cache.
 type Cache interface {
 	// Get looks up a key's value from the cache.
-	Get(key string) (value []tgbotapi.ChatMember, ok bool)
+	Get(key int64) (value []tgbotapi.ChatMember, ok bool)
 
 	// Set adds a value to the cache.
-	Set(key string, value []tgbotapi.ChatMember) error
+	Set(key int64, value []tgbotapi.ChatMember) error
 }

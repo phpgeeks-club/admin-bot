@@ -7,4 +7,9 @@ filename: "{{.InterfaceName | snakecase}}_mock.go"
 outpkg: "mocks"
 packages:
   geeksonator/internal/observer:
+    interfaces:
+        BotProvider:
+        Cache:
   geeksonator/internal/provider/telegram:
+    interfaces:
+        BotAPI:

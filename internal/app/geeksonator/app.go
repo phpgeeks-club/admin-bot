@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	cacheMaxSize = 1
+	cacheMaxSize = 100
 	cacheTTL     = 24 * time.Hour
 )
 
@@ -66,10 +66,10 @@ func Start() error {
 
 	updatesChan := botAPI.GetUpdatesChan(updateConfig)
 
-	cache, err := cacher.NewCacher[string, []tgbotapi.ChatMember](
+	cache, err := cacher.NewCacher[int64, []tgbotapi.ChatMember](
 		cacheMaxSize,
 		cacheTTL,
-		cacher.WithDebug[string, []tgbotapi.ChatMember](logger),
+		cacher.WithDebug[int64, []tgbotapi.ChatMember](logger),
 	)
 	if err != nil {
 		return fmt.Errorf("cacher.NewCacher: %v", err)

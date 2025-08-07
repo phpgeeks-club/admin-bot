@@ -9,10 +9,6 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-const (
-	cacheKey = "admins"
-)
-
 // Manager is manager for observer.
 type Manager struct {
 	bot            BotProvider
@@ -169,7 +165,7 @@ func (m *Manager) log(msg string, fields ...zapcore.Field) {
 
 // getAdmins returns admins.
 func (m *Manager) getAdmins(chatCfg tgbotapi.ChatConfig) ([]tgbotapi.ChatMember, error) {
-	adminsFromCache, ok := m.cache.Get(cacheKey)
+	adminsFromCache, ok := m.cache.Get(chatCfg.ChatID)
 	if ok {
 		return adminsFromCache, nil
 	}
@@ -179,7 +175,7 @@ func (m *Manager) getAdmins(chatCfg tgbotapi.ChatConfig) ([]tgbotapi.ChatMember,
 		return nil, fmt.Errorf("m.bot.GetChatAdministrators: %v", err)
 	}
 
-	if err := m.cache.Set(cacheKey, admins); err != nil {
+	if err := m.cache.Set(chatCfg.ChatID, admins); err != nil {
 		m.log("Set admins in cache",
 			zap.Error(err),
 		)

@@ -22,15 +22,15 @@ func (_m *CacheMock) EXPECT() *CacheMock_Expecter {
 }
 
 // Get provides a mock function with given fields: key
-func (_m *CacheMock) Get(key string) ([]tgbotapi.ChatMember, bool) {
+func (_m *CacheMock) Get(key int64) ([]tgbotapi.ChatMember, bool) {
 	ret := _m.Called(key)
 
 	var r0 []tgbotapi.ChatMember
 	var r1 bool
-	if rf, ok := ret.Get(0).(func(string) ([]tgbotapi.ChatMember, bool)); ok {
+	if rf, ok := ret.Get(0).(func(int64) ([]tgbotapi.ChatMember, bool)); ok {
 		return rf(key)
 	}
-	if rf, ok := ret.Get(0).(func(string) []tgbotapi.ChatMember); ok {
+	if rf, ok := ret.Get(0).(func(int64) []tgbotapi.ChatMember); ok {
 		r0 = rf(key)
 	} else {
 		if ret.Get(0) != nil {
@@ -38,7 +38,7 @@ func (_m *CacheMock) Get(key string) ([]tgbotapi.ChatMember, bool) {
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string) bool); ok {
+	if rf, ok := ret.Get(1).(func(int64) bool); ok {
 		r1 = rf(key)
 	} else {
 		r1 = ret.Get(1).(bool)
@@ -53,14 +53,14 @@ type CacheMock_Get_Call struct {
 }
 
 // Get is a helper method to define mock.On call
-//   - key string
+//   - key int64
 func (_e *CacheMock_Expecter) Get(key interface{}) *CacheMock_Get_Call {
 	return &CacheMock_Get_Call{Call: _e.mock.On("Get", key)}
 }
 
-func (_c *CacheMock_Get_Call) Run(run func(key string)) *CacheMock_Get_Call {
+func (_c *CacheMock_Get_Call) Run(run func(key int64)) *CacheMock_Get_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string))
+		run(args[0].(int64))
 	})
 	return _c
 }
@@ -70,17 +70,17 @@ func (_c *CacheMock_Get_Call) Return(value []tgbotapi.ChatMember, ok bool) *Cach
 	return _c
 }
 
-func (_c *CacheMock_Get_Call) RunAndReturn(run func(string) ([]tgbotapi.ChatMember, bool)) *CacheMock_Get_Call {
+func (_c *CacheMock_Get_Call) RunAndReturn(run func(int64) ([]tgbotapi.ChatMember, bool)) *CacheMock_Get_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Set provides a mock function with given fields: key, value
-func (_m *CacheMock) Set(key string, value []tgbotapi.ChatMember) error {
+func (_m *CacheMock) Set(key int64, value []tgbotapi.ChatMember) error {
 	ret := _m.Called(key, value)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, []tgbotapi.ChatMember) error); ok {
+	if rf, ok := ret.Get(0).(func(int64, []tgbotapi.ChatMember) error); ok {
 		r0 = rf(key, value)
 	} else {
 		r0 = ret.Error(0)
@@ -95,15 +95,15 @@ type CacheMock_Set_Call struct {
 }
 
 // Set is a helper method to define mock.On call
-//   - key string
+//   - key int64
 //   - value []tgbotapi.ChatMember
 func (_e *CacheMock_Expecter) Set(key interface{}, value interface{}) *CacheMock_Set_Call {
 	return &CacheMock_Set_Call{Call: _e.mock.On("Set", key, value)}
 }
 
-func (_c *CacheMock_Set_Call) Run(run func(key string, value []tgbotapi.ChatMember)) *CacheMock_Set_Call {
+func (_c *CacheMock_Set_Call) Run(run func(key int64, value []tgbotapi.ChatMember)) *CacheMock_Set_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].([]tgbotapi.ChatMember))
+		run(args[0].(int64), args[1].([]tgbotapi.ChatMember))
 	})
 	return _c
 }
@@ -113,7 +113,7 @@ func (_c *CacheMock_Set_Call) Return(_a0 error) *CacheMock_Set_Call {
 	return _c
 }
 
-func (_c *CacheMock_Set_Call) RunAndReturn(run func(string, []tgbotapi.ChatMember) error) *CacheMock_Set_Call {
+func (_c *CacheMock_Set_Call) RunAndReturn(run func(int64, []tgbotapi.ChatMember) error) *CacheMock_Set_Call {
 	_c.Call.Return(run)
 	return _c
 }
