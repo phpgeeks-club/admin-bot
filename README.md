@@ -2,7 +2,6 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/phpgeeks-club/admin-bot?style=flat-square)](https://goreportcard.com/report/github.com/phpgeeks-club/admin-bot)
 [![Audit](https://github.com/phpgeeks-club/admin-bot/actions/workflows/audit.yml/badge.svg?branch=master)](https://github.com/phpgeeks-club/admin-bot/actions/workflows/audit.yml)
-![GitHub release (with filter)](https://img.shields.io/github/v/release/phpgeeks-club/admin-bot)
 ![License](https://img.shields.io/github/license/phpgeeks-club/admin-bot.svg)
 
 ## Install

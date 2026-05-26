@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout GitHub Action
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
 
       - name: Fetch tags
         run: git fetch --force --tags
@@ -23,14 +23,14 @@ jobs:
         run: echo ${{github.ref_name}}
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
       - name: Build Image
-        run: docker build . --tag ghcr.io/phpgeeks-club/geeksonator:${{github.ref_name}}
+        run: docker build -t ghcr.io/phpgeeks-club/geeksonator:${{github.ref_name}} .
 
       - name: Push Image
         run: docker push ghcr.io/phpgeeks-club/geeksonator:${{github.ref_name}}

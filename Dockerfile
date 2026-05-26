@@ -1,5 +1,5 @@
 # Run
-# docker build -f ./Dockerfile -t geeksonator:latest .
+# docker build --no-cache -f ./Dockerfile -t geeksonator:latest .
 # docker run -d --env-file=/path/to/.env --name geeksonator.app geeksonator:latest .
 
 ##################################
@@ -34,7 +34,9 @@ WORKDIR /app
 COPY . .
 
 # Build the binary.
-RUN make build
+RUN go mod tidy
+RUN go mod vendor
+RUN GOOS=linux GOARCH=amd64 go build -trimpath -ldflags "-s -w" -o /app/bin/geeksonator /app/cmd/geeksonator
 
 ##############################
 # STEP 2 build a small image #

@@ -20,17 +20,12 @@ test:
 
 .PHONY: docker_build
 docker_build:
-	@docker build -f ./Dockerfile -t geeksonator_dev .
+	@docker build --no-cache -f ./Dockerfile -t geeksonator_dev .
 
 .PHONY: docker_run
 docker_run:
-	@GOOS=linux GOARCH=amd64 go build -trimpath -ldflags "-s -w" -o ./bin/geeksonator ./cmd/geeksonator
-
-.PHONY: build
-build: deps
-	@GOOS=linux GOARCH=amd64 go build -trimpath -ldflags "-s -w" -o ./bin/geeksonator ./cmd/geeksonator
+	@docker run -d --env-file=./.env --name geeksonator.dev geeksonator_dev .
 
 .PHONY: tools
 tools: deps
 	@go install github.com/vektra/mockery/v2@v2.36.0
-	@go install github.com/goreleaser/goreleaser@v1.21.2
