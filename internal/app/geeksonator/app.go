@@ -95,10 +95,7 @@ func Start() error {
 
 	var wg sync.WaitGroup
 
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-
+	wg.Go(func() {
 		err = observerManager.Run(ctx)
 		if err != nil {
 			logger.Error("Observer manager Run error",
@@ -108,7 +105,7 @@ func Start() error {
 			return
 		}
 		logger.Info("Observer manager gracefully stopped")
-	}()
+	})
 
 	wg.Wait()
 
